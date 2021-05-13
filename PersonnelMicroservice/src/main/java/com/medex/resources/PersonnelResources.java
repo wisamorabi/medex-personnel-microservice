@@ -61,4 +61,10 @@ public class PersonnelResources {
 	public Status removePersonnel(@PathParam("Personnelid") int id, Personnel Personnel) {
 		return personnelService.removePersonnel(id);
 	}
+	
+	@Path("/Orders")
+	public OrderResources getOrders()
+	{
+		return new OrderResources();
+	}
 }

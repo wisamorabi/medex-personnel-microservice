@@ -12,30 +12,42 @@ public class Personnel {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //"Do this identification for me, generate that specific ID for me
 	@Column(name="id") //Which column?
 	int id;
-	@Column(name="consumerID")
-	int consumerID;
+	@Column(name="name")
+	String name;
+	@Column(name="orderid")
+	int orderid = -1;
 
 	public Personnel() {}
 
 	//Non default constructor
-	public Personnel(int id, int aConsumerID) {
+	public Personnel(int id, String name, int aorderid) {
 		this.id = id;
-		this.consumerID = aConsumerID;
+		this.name = name;
+		this.orderid = aorderid;
 	}
-	public int getId()
-	{
+
+	public int getId() {
 		return id;
 	}
-	public int getConsumerID()
-	{
-		return consumerID;
-	}
-	public void setId(int id)
-	{
+
+	public void setId(int id) {
 		this.id = id;
 	}
-	public void setConsumerID(int aconsumerID)
-	{
-		this.consumerID = aconsumerID;
+
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getOrderid() {
+		return orderid;
+	}
+
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
+	}
+
+	
 }

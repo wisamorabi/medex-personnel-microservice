@@ -2,8 +2,11 @@ package com.medex.services;
 
 import java.util.List;
 
+import com.medex.communicationmodules.Status;
 import com.medex.database.PersonnelDB;
 import com.medex.model.Personnel;
+
+
 
 //This is the "backend" of our resources. This is where the logic is executed; the logic is basic since the database handles itself very well.
 public class PersonnelService {
@@ -32,9 +35,11 @@ public class PersonnelService {
 		personneldb.updatePersonnel(aPersonnel); return aPersonnel;
 	}
 	
-	public void removePersonnel(int id)
+	public Status removePersonnel(int id)
 	{
+		if (personneldb.getPersonnel(id) == null) return new Status(false);
 		personneldb.deletePersonnel(id);
+		return new Status(true);
 	}
 }
 

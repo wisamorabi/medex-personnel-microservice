@@ -12,12 +12,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.medex.communicationmodules.Status;
 import com.medex.model.Personnel;
 import com.medex.services.PersonnelService;
 
 
+
 //Request resources which acts as a layer before our Personnel services
-@Path("/")
+@Path("/Personnel")
 public class PersonnelResources {
 	PersonnelService personnelService = new PersonnelService();
 
@@ -56,7 +58,7 @@ public class PersonnelResources {
 
 	@DELETE
 	@Path("{Personnelid}")
-	public void removePersonnel(@PathParam("Personnelid") int id, Personnel Personnel) {
-		personnelService.removePersonnel(id);
+	public Status removePersonnel(@PathParam("Personnelid") int id, Personnel Personnel) {
+		return personnelService.removePersonnel(id);
 	}
 }

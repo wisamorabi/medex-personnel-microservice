@@ -19,7 +19,7 @@ import com.medex.services.PersonnelService;
 
 
 //Request resources which acts as a layer before our Personnel services
-@Path("/Personnel")
+@Path("/personnel")
 public class PersonnelResources {
 	PersonnelService personnelService = new PersonnelService();
 
@@ -58,11 +58,11 @@ public class PersonnelResources {
 
 	@DELETE
 	@Path("{Personnelid}")
-	public Status removePersonnel(@PathParam("Personnelid") int id, Personnel Personnel) {
-		return personnelService.removePersonnel(id);
+	public Status removePersonnel(@PathParam("Personnelid") int personnelid, Personnel Personnel) {
+		return personnelService.removePersonnel(personnelid);
 	}
 	
-	@Path("/Orders")
+	@Path("{Personnelid}/orders")
 	public OrderResources getOrders()
 	{
 		return new OrderResources();

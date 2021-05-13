@@ -1,18 +1,21 @@
 package com.medex.services;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.medex.communicationmodules.Status;
 import com.medex.database.OrderDB;
 import com.medex.database.PersonnelDB;
 import com.medex.dependentresources.Order;
+import com.medex.model.Personnel;
 
 
 //This is the "backend" of our resources. This is where the logic is executed; the logic is basic since the database handles itself very well.
 public class OrderService {
 	OrderDB orderdb = new OrderDB(); //(Instead of the pseudo-database)
 	PersonnelDB personneldb = new PersonnelDB(); //(Instead of the pseudo-database)
+	OrderService orderService = new OrderService();
+	PersonnelService personnelService = new PersonnelService();
 
 	public OrderService() {} 
 	
@@ -38,7 +41,36 @@ public class OrderService {
 		orderdb.updateOrder(order);
 		return order;
 	}
-	
+	public Status attachOrder(int personnelid, Personnel apersonnel)
+	{
+		if (personnelService.getPersonnel(personnelid) == null) return new Status(false);
+		if (personnelService.getPersonnel(personnelid).getOrderid() != -1) return new Status(false);
+		for (Order o : orderService.getAllOrders())
+		{
+			boolean orderObjectIsFine = false;
+			if (o.getDone() == false && o.getInProgress() == false) orderObjectIsFine = true;
+			
+			boolean personnelObjectIsFine = true;
+			if (orderObjectIsFine)
+			{
+				for (Personnel p : personnelService.getAllPersonnels())
+				{
+					if (p.getOrderid() == o.getId())
+					{
+						personnelObjectIsFine = false;
+						break;
+					}
+				}
+				if (personnelObjectIsFine)
+				{
+					apersonnel.setOrderid(o.getId());
+					personnelService.updatePersonnel(apersonnel);
+					return new Status(true);
+				}
+			}
+		}
+		return new Status(false);
+	}
 
 }
 

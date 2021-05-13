@@ -5,7 +5,7 @@ import javax.persistence.*;
 //The personnel class
 //Type = 1
 @Entity //A 'serializable' entity
-@Table(name = "Personnel") //Where this entity will be placed
+@Table(name = "Personnel", schema ="PersonnelMicroserviceSchema") //Where this entity will be placed
 //Now, the fields that we will annotate will be stored in the hosts table.
 public class Personnel {
 	@Id //Primary key

@@ -32,7 +32,9 @@ public class PersonnelService {
 	
 	public Personnel updatePersonnel(Personnel aPersonnel)
 	{
-		personneldb.updatePersonnel(aPersonnel); return aPersonnel;
+		if (personneldb.getPersonnel(aPersonnel.getId()) == null) return null;
+		personneldb.updatePersonnel(aPersonnel);
+		return aPersonnel;
 	}
 	
 	public Status removePersonnel(int id)
@@ -41,6 +43,9 @@ public class PersonnelService {
 		personneldb.deletePersonnel(id);
 		return new Status(true);
 	}
+	
+	
+	
 }
 
 

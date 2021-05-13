@@ -14,7 +14,7 @@ public class PersonnelDB {
 	public void insertPersonnel(Personnel personnel)
 	{
 		Transaction transaction = null; //You have to make a transaction object
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPersonnelSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -39,7 +39,7 @@ public class PersonnelDB {
 	public void updatePersonnel(Personnel personnel)
 	{
 		Transaction transaction = null; //You have to make a transaction object
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPersonnelSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -67,7 +67,7 @@ public class PersonnelDB {
 	{
 		Transaction transaction = null; //You have to make a transaction object
 		Personnel personnel = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPersonnelSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -94,8 +94,7 @@ public class PersonnelDB {
 	{
 		Transaction transaction = null;
 		List<Personnel> personnels = null;
-		
-		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		try (Session session = HibernateUtil.getPersonnelSessionFactory().openSession())
 		{
 			transaction = session.beginTransaction();
 			personnels = session.createQuery("from Personnel", Personnel.class).list(); //This is a hibernate query (Get all personnels from the personnels database)
@@ -109,7 +108,7 @@ public class PersonnelDB {
 	{
 		Transaction transaction = null;
 		Personnel personnel = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		try (Session session = HibernateUtil.getPersonnelSessionFactory().openSession())
 		{
 			//start a transaction
 			transaction = session.beginTransaction();

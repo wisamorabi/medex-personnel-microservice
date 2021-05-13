@@ -7,7 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-import com.medex.dependentresources.Order;
+import com.medex.dependentresources.Ordr;
 import com.medex.model.Personnel;
 
 
@@ -77,7 +77,7 @@ public class HibernateUtil {
 				
 				configuration.setProperties(settings); //Applying the settings to the configuration object
 
-				configuration.addAnnotatedClass(Order.class); //The patient class is the one that has the annotation, this is what we consider when saving to the database.
+				configuration.addAnnotatedClass(Ordr.class); //The patient class is the one that has the annotation, this is what we consider when saving to the database.
 				//If we have multiple classes then we do configuration.addAnnotatedClass(X.class) again.
 
 

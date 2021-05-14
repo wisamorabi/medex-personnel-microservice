@@ -43,12 +43,17 @@ public class OrderService {
 			apersonnel.setOrderid(-1);
 			personnelService.updatePersonnel(apersonnel);
 		}
+
+		order.setDone(true);
+		order.setInProgress(false);
+		order.setId(orderid);
+		order.setPatientId(orderdb.getOrder(orderid).getPatientID());
 		orderdb.updateOrder(order);
 		return order;
 	}
 	public Status checkOrder(int personnelid, int orderid)
 	{
-
+		
 		if (orderdb.getOrder(orderid).getDone() == true)
 		{
 			Personnel apersonnel = personnelService.getPersonnel(personnelid);
@@ -75,8 +80,7 @@ public class OrderService {
 				orderdb.updateOrder(o);
 				return new Status(true);
 			}
-			
-			
+					
 
 		}
 		return new Status(false);

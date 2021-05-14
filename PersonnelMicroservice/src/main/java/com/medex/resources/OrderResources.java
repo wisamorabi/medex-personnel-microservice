@@ -33,6 +33,14 @@ public class OrderResources {
 		return orderService.attachOrder(personnelid);
 	}
 	
+	
+	@GET
+	@Path("{orderid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Ordr actuallyGetOrder(@PathParam("Personnelid") int personnelid, @PathParam("orderid") int orderid) {
+		return orderService.getOrder(orderid);
+	}
+	
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	public Status checkOrder(@PathParam("Personnelid") int personnelid, @PathParam("Orderid") int orderid) {

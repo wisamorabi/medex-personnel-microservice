@@ -1,13 +1,15 @@
-package com.medex.model;
+package com.medex.communicationmodules;
 
 import javax.persistence.*;
+
+import com.medex.model.Personnel;
 
 //The personnel class
 //Type = 1
 @Entity //A 'serializable' entity
 @Table(name = "Personnel", schema ="PersonnelMicroserviceSchema") //Where this entity will be placed
 //Now, the fields that we will annotate will be stored in the hosts table.
-public class Personnel {
+public class PersonnelInfo {
 	@Id //Primary key
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //"Do this identification for me, generate that specific ID for me
 	@Column(name="id") //Which column?
@@ -16,20 +18,22 @@ public class Personnel {
 	String name;
 	@Column(name="orderid")
 	int orderid = -1;
-	@Column(name="username")
-	String username;
-	@Column(name="password")
-	String password;
 
-	public Personnel() {}
+	public PersonnelInfo() {}
 
 	//Non default constructor
-	public Personnel(int id, String name, int aorderid, String username, String password) {
+	
+	public PersonnelInfo(Personnel p)
+	{
+		this.id = p.getId();
+		this.name = p.getName();
+		this.orderid = p.getOrderid();
+	}
+	
+	public PersonnelInfo(int id, String name, int aorderid) {
 		this.id = id;
 		this.name = name;
 		this.orderid = aorderid;
-		this.username = username;
-		this.password = password;
 	}
 
 	public int getId() {
@@ -53,22 +57,6 @@ public class Personnel {
 
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	

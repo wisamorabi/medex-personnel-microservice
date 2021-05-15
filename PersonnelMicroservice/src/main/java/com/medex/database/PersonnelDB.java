@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+
 import com.medex.model.Personnel;
 
 //This class is specifically for the personnels database operations
@@ -138,5 +139,43 @@ public class PersonnelDB {
 		}
 		return personnel; //Return the personnel object retrieved
 	}
+	
+	
+	public Personnel getPersonnelLogin(String username, String password)
+	{
+		Transaction transaction = null;
+		Personnel personnel = null;
+		try (Session session = HibernateUtil.getPersonnelSessionFactory().openSession())
+		{
+			//start a transaction
+			transaction = session.beginTransaction();
+			
+			// get one object
+			String hql = "FROM Personnel H WHERE H.username = :username and H.password = :password"; //From the patient table
+			Query query = session.createQuery(hql);
+			query.setParameter("username", username); //The parameter ":id" is set to the id we passed.
+			query.setParameter("password", password); //The parameter ":id" is set to the id we passed.
+			List results = query.getResultList(); //The results are given to us in a list.
+												  //Since the id is unique, we will get a list of one item
+			
+			//If the result is not null, we get a single patient object
+			if (results != null && !results.isEmpty())
+			{
+				personnel = (Personnel) results.get(0); //So, we retrieve said patient from the first index in the list
+			}
+			//commit transaction
+			transaction.commit();
+		}
+		catch (Exception e)
+		{
+			if (transaction != null)
+			{
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		return personnel; //Return the patient object retrieved
+	}
+	
 	
 }

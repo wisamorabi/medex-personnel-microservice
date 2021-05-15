@@ -39,7 +39,7 @@ public class OrderService {
 		if (orderdb.getOrder(orderid) == null) return null;
 		if (order.getDone() == true)
 		{
-			Personnel apersonnel = personnelService.getPersonnel(personnelid);
+			Personnel apersonnel = personneldb.getPersonnel(personnelid);
 			apersonnel.setOrderid(-1);
 			personnelService.updatePersonnel(apersonnel);
 		}
@@ -56,7 +56,7 @@ public class OrderService {
 		
 		if (orderdb.getOrder(orderid).getDone() == true)
 		{
-			Personnel apersonnel = personnelService.getPersonnel(personnelid);
+			Personnel apersonnel = personneldb.getPersonnel(personnelid);
 			apersonnel.setOrderid(-1);
 			personnelService.updatePersonnel(apersonnel);
 			return new Status(true);
@@ -73,7 +73,7 @@ public class OrderService {
 			System.out.println(o.getDone() + " " + o.getInProgress());
 			if (o.getDone() == false && o.getInProgress() == false) 
 			{
-				Personnel apersonnel = personnelService.getPersonnel(personnelid);
+				Personnel apersonnel = personneldb.getPersonnel(personnelid);
 				apersonnel.setOrderid(o.getId());
 				personnelService.updatePersonnel(apersonnel);
 				o.setInProgress(true);

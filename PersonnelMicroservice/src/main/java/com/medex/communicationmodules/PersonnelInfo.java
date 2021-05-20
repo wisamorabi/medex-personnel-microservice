@@ -3,7 +3,7 @@ package com.medex.communicationmodules;
 import javax.persistence.*;
 
 import com.medex.model.Personnel;
-
+//
 //The personnel class
 //Type = 1
 @Entity //A 'serializable' entity

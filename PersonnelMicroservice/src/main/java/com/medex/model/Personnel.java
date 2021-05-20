@@ -14,8 +14,8 @@ public class Personnel {
 	int id;
 	@Column(name="name")
 	String name;
-	@Column(name="orderid")
-	int orderid = -1;
+	@Column(name="orderID")
+	int orderID = -1;
 	@Column(name="username")
 	String username;
 	@Column(name="password")
@@ -24,10 +24,10 @@ public class Personnel {
 	public Personnel() {}
 
 	//Non default constructor
-	public Personnel(int id, String name, int aorderid, String username, String password) {
+	public Personnel(int id, String name, int aorderID, String username, String password) {
 		this.id = id;
 		this.name = name;
-		this.orderid = aorderid;
+		this.orderID = aorderID;
 		this.username = username;
 		this.password = password;
 	}
@@ -47,12 +47,12 @@ public class Personnel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getOrderid() {
-		return orderid;
+	public int getOrderID() {
+		return orderID;
 	}
 
-	public void setOrderid(int orderid) {
-		this.orderid = orderid;
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
 	}
 
 	public String getUsername() {

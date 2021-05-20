@@ -42,7 +42,7 @@ public class PersonnelService {
 	
 	public PersonnelInfo updatePersonnel(Personnel aPersonnel)
 	{
-		System.out.println(aPersonnel.getId() + " " + aPersonnel.getOrderid() + " " + aPersonnel.getName());
+		System.out.println(aPersonnel.getId() + " " + aPersonnel.getOrderID() + " " + aPersonnel.getName());
 		if (personneldb.getPersonnel(aPersonnel.getId()) == null) return null;
 		personneldb.updatePersonnel(aPersonnel);
 		return new PersonnelInfo(aPersonnel);

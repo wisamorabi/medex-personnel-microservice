@@ -32,22 +32,20 @@ public class OrderService {
 	}
 	
 
-	public Ordr updateOrder(int personnelid, int orderid, Ordr order)
+	public Ordr updateOrder(int personnelid, int orderid)
 	{
 		if (personneldb.getPersonnel(personnelid) == null) return null;
-		if (personneldb.getPersonnel(personnelid).getOrderid() != orderid) return null;
+		if (personneldb.getPersonnel(personnelid).getOrderID() == -1) return null;
 		if (orderdb.getOrder(orderid) == null) return null;
-		if (order.getDone() == true)
-		{
-			Personnel apersonnel = personneldb.getPersonnel(personnelid);
-			apersonnel.setOrderid(-1);
-			personnelService.updatePersonnel(apersonnel);
-		}
-
+		Personnel apersonnel = personneldb.getPersonnel(personnelid);
+		Ordr order = orderdb.getOrder(orderid);
+		apersonnel.setOrderID(-1);
 		order.setDone(true);
 		order.setInProgress(false);
 		order.setId(orderid);
 		order.setPatientId(orderdb.getOrder(orderid).getPatientID());
+		order.setLat(orderdb.getOrder(orderid).getLat());
+		order.setLon(orderdb.getOrder(orderid).getLon());
 		orderdb.updateOrder(order);
 		return order;
 	}
@@ -57,7 +55,7 @@ public class OrderService {
 		if (orderdb.getOrder(orderid).getDone() == true)
 		{
 			Personnel apersonnel = personneldb.getPersonnel(personnelid);
-			apersonnel.setOrderid(-1);
+			apersonnel.setOrderID(-1);
 			personnelService.updatePersonnel(apersonnel);
 			return new Status(true);
 		}
@@ -67,14 +65,14 @@ public class OrderService {
 	public Status attachOrder(int personnelid)
 	{
 		if (personnelService.getPersonnel(personnelid) == null) return new Status(false);
-		if (personnelService.getPersonnel(personnelid).getOrderid() != -1) return new Status(false);
+		if (personnelService.getPersonnel(personnelid).getOrderID() != -1) return new Status(false);
 		for (Ordr o : getAllOrders())
 		{
 			System.out.println(o.getDone() + " " + o.getInProgress());
 			if (o.getDone() == false && o.getInProgress() == false) 
 			{
 				Personnel apersonnel = personneldb.getPersonnel(personnelid);
-				apersonnel.setOrderid(o.getId());
+				apersonnel.setOrderID(o.getId());
 				personnelService.updatePersonnel(apersonnel);
 				o.setInProgress(true);
 				orderdb.updateOrder(o);

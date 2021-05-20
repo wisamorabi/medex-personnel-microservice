@@ -34,13 +34,15 @@ public class OrderResources {
 	
 	
 	@GET
-	@Path("{orderid}")
+	@Path("{Orderid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Ordr actuallyGetOrder(@PathParam("Personnelid") int personnelid, @PathParam("orderid") int orderid) {
+	public Ordr actuallyGetOrder(@PathParam("Personnelid") int personnelid, @PathParam("Orderid") int orderid) {
 		return orderService.getOrder(orderid);
 	}
 	
+	
 	@DELETE
+	@Path("{Orderid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Status checkOrder(@PathParam("Personnelid") int personnelid, @PathParam("Orderid") int orderid) {
 		return orderService.checkOrder(personnelid, orderid);
@@ -48,11 +50,10 @@ public class OrderResources {
 
 	//Set the order to complete, etc.
 	@PUT
-	@Path("{orderid}")
+	@Path("{Orderid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Ordr updateOrder(@PathParam("PersonnelID") int personnelid, @PathParam("Orderid") int orderid, Ordr order) {
-		order.setId(orderid);
-		return orderService.updateOrder(personnelid, orderid, order);
+	public Ordr updateOrder(@PathParam("PersonnelID") int personnelid, @PathParam("Orderid") int orderid) {
+		return orderService.updateOrder(personnelid, orderid);
 	}
 }

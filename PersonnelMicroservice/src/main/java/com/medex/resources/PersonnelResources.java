@@ -69,6 +69,7 @@ public class PersonnelResources {
 		return new OrderResources();
 	}
 	
+	@GET
 	@Path("/login/{username}/{password}")
 	public Personnel getPersonnelLogin(@PathParam("username") String username, @PathParam("password") String password)
 	{

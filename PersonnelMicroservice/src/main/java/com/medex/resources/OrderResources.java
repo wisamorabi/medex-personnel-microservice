@@ -9,8 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.medex.communicationmodules.PersonnelInfo;
 import com.medex.communicationmodules.Status;
 import com.medex.dependentresources.Ordr;
+import com.medex.model.Personnel;
 import com.medex.services.OrderService;
 import com.medex.services.PersonnelService;
 
@@ -53,7 +55,8 @@ public class OrderResources {
 	@Path("{Orderid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Ordr updateOrder(@PathParam("PersonnelID") int personnelid, @PathParam("Orderid") int orderid) {
+	public PersonnelInfo updateOrder(@PathParam("Personnelid") int personnelid, @PathParam("Orderid") int orderid) {
 		return orderService.updateOrder(personnelid, orderid);
+
 	}
 }

@@ -3,6 +3,7 @@ package com.medex.services;
 
 import java.util.List;
 
+import com.medex.communicationmodules.PersonnelInfo;
 import com.medex.communicationmodules.Status;
 import com.medex.database.OrderDB;
 import com.medex.database.PersonnelDB;
@@ -32,14 +33,19 @@ public class OrderService {
 	}
 	
 
-	public Ordr updateOrder(int personnelid, int orderid)
+	public PersonnelInfo updateOrder(int personnelid, int orderid)
 	{
+		System.out.println(personnelid+" " + orderid);
 		if (personneldb.getPersonnel(personnelid) == null) return null;
+		System.out.println("X2");
 		if (personneldb.getPersonnel(personnelid).getOrderID() == -1) return null;
+		System.out.println("X3");
 		if (orderdb.getOrder(orderid) == null) return null;
+		System.out.println("X");
 		Personnel apersonnel = personneldb.getPersonnel(personnelid);
 		Ordr order = orderdb.getOrder(orderid);
 		apersonnel.setOrderID(-1);
+		personneldb.updatePersonnel(apersonnel);
 		order.setDone(true);
 		order.setInProgress(false);
 		order.setId(orderid);
@@ -47,7 +53,7 @@ public class OrderService {
 		order.setLat(orderdb.getOrder(orderid).getLat());
 		order.setLon(orderdb.getOrder(orderid).getLon());
 		orderdb.updateOrder(order);
-		return order;
+		return personnelService.getPersonnel(personnelid);
 	}
 	public Status checkOrder(int personnelid, int orderid)
 	{
